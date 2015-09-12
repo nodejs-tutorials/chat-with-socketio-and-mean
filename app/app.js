@@ -1,7 +1,7 @@
-var express = require('express'),
-  path = require('path'),
-  cookieParser = require('cookie-parser'),
-  bodyParser = require('body-parser');
+var express      = require('express'),
+    path         = require('path'),
+    cookieParser = require('cookie-parser'),
+    bodyParser   = require('body-parser');
 
 var routes = require('./routes');
 
@@ -20,8 +20,8 @@ app.get('/', routes.index);
 
 app.set('port', process.env.PORT || 3000);
 
-var server = app.listen(app.get('port'), function() {
-	// log a message to console!
+var server = app.listen(app.get('port'), function () {
+    // log a message to console!
 });
 
 module.exports = app;

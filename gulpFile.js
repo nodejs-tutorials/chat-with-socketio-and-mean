@@ -1,4 +1,4 @@
-var gulp = require('gulp')
+var gulp  = require('gulp')
 var shell = require('gulp-shell')
 
 var NodeWebkitBuilder = require('node-webkit-builder');
@@ -8,7 +8,7 @@ gulp.task('run', shell.task([
     'node node_modules/node-webkit-builder/bin/nwbuild -r ./'
 ]));
 
-gulp.task('build', function(cb) {
+gulp.task('build', function (cb) {
 
     // Read package.json
     var package = require('./package.json')
@@ -17,10 +17,10 @@ gulp.task('build', function(cb) {
     var modules = []
     if (!!package.dependencies) {
         modules = Object.keys(package.dependencies)
-            .filter(function(m) {
+            .filter(function (m) {
                 return m != 'nodewebkit'
             })
-            .map(function(m) {
+            .map(function (m) {
                 return './node_modules/' + m + '/**/*'
             });
     }
@@ -45,21 +45,21 @@ gulp.task('build', function(cb) {
 
     // Initialize NodeWebkitBuilder
     var nw = new NodeWebkitBuilder({
-        files: ['./package.json', './app/**/*'].concat(modules),
-        cacheDir: './build/cache',
-        platforms: platforms,
-        macIcns: './app/assets/icons/play-icon.icns',
-        winIco: './app/assets/icons/play-icon.ico',
+        files        : ['./package.json', './app/**/*'].concat(modules),
+        cacheDir     : './build/cache',
+        platforms    : platforms,
+        macIcns      : './app/assets/icons/play-icon.icns',
+        winIco       : './app/assets/icons/play-icon.ico',
         checkVersions: false
     })
 
-    nw.on('log', function(msg) {
+    nw.on('log', function (msg) {
         // Ignore 'Zipping... messages
         if (msg.indexOf('Zipping') !== 0) console.log(msg);
     });
 
     // Build!
-    nw.build(function(err) {
+    nw.build(function (err) {
 
         if (!!err) {
             return console.error(err);
